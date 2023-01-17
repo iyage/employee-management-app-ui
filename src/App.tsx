@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Route, Routes } from "react-router-dom";
+import Container from "./components/Container";
+import EmplyeeListPage from "./pages/EmplyeeListPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import { ReactQueryDevtools } from "react-query/devtools";
+import Modal from "./components/Modal";
+import { useSelector } from "react-redux";
+import { RootState } from "./app/store";
 function App() {
+  const modalState = useSelector((state:RootState)=>state.modalReducer.value)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   
+    <div >
+              { modalState&&<Modal/>}
+      <Routes>
+        <Route path="/" element={ <Container/>}>
+          <Route index element={<EmplyeeListPage/>}/>
+          <Route path="/add-employee" element={<RegistrationPage/>}/>
+          </Route>
+      </Routes>
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
     </div>
+      
   );
 }
 
