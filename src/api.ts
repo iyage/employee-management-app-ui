@@ -15,6 +15,7 @@ export const registerNewEmployee= async (data:InputData)=>{
     return response;
 }
 export const fetchAllEmployee= async ()=>{
+   console.log(process.env.REACT_APP_BASE_URL)
   const  response = await api.get('/get_all_employee')
 
     return response;
